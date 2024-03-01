@@ -1,0 +1,62 @@
+﻿@model ProiectDAW.Models.Category
+
+@{
+    ViewBag.Title = "Categoria ";
+}
+
+<h1 class="Titluri">@ViewBag.Title<i><b>@Model.CategoryName</b></i></h1>
+
+<div class="ButoaneSortareTopic">
+    <div class="butonSort">
+        <a class="button-56" href="/Categories/Index/">Afisare lista categorii</a>
+    </div>
+ </div>
+
+<form method="post" action="/Categories/Delete/@Model.Id">
+    @if (User.IsInRole("Admin"))
+    {
+        <button class="btn btn-danger" type="submit">Sterge categoria</button>
+    }
+</form>
+
+<br />
+
+<h2><i>Topicuri asociate categoriei:</i></h2>
+@foreach (var topic in ViewBag.Topics)
+{
+
+    <h3 class="topic-title">@topic.Title</h3>
+    <a href="/Topics/Show/@topic.Id"><button type="button" class="btn btn-outline-dark">Vezi topicul</button></a>
+    <br />
+}
+<br />
+<br />
+<br />
+<br />
+<br />
+<div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link"
+                   href="/Categories/Show/@Model.Id?page=1" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            @for (int i = 1; i <= ViewBag.LastPage; i++)
+            {
+                <li class="page-item">
+                    <a class="page-link"
+                       href="/Categories/Show/@Model.Id?page=@i">@(i)</a>
+                </li>
+            }
+            <li class="page-item">
+                <a class="page-link"
+                   href="/Categories/Show/@Model.Id?page=@(ViewBag.LastPage)" aria-label="Next">
+
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>

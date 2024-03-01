@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="Titluri">Cele mai recente subiecte</h2>
+
+
+@if (ViewBag.Message != null)
+{
+    <div class="@ViewBag.Alert p-3 rounded-3 text-center mb-5">@ViewBag.Message</div>
+}
+
+@functions {
+    string GetActiveClass(string sortByValue)
+    {
+        return ViewBag.SortBy == sortByValue ? "active" : "";
+    }
+}
+
+
+<br />
+
+<div class="ButoaneSortareTopic">
+    <div class="butonSort">
+        <a asp-action="Index" asp-route-sortOrder="@ViewBag.SortOrder"
+           asp-route-sortBy="Title" class="button-56 @GetActiveClass("Title")">Sortează după Titlu</a>
+    </div>
+    <div class="butonSort">
+        <a asp-action="Index" asp-route-sortOrder="@ViewBag.SortOrder"
+           asp-route-sortBy="Category" class="button-56 @GetActiveClass("Category")">Sortează după Categorie</a>
+    </div>
+</div>
+
+@foreach (ProiectDAW.Models.Topic topic in ViewBag.Topics)
+{
+    
+        @Html.Partial("_IndexPartial", topic)
+    <a class="button-56" role="button" href="/Topics/Show/@topic.Id"> Accesează discutia</a>
+    
+    <br />
+    <br />
+}
+<div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="@($"{ViewBag.PaginationBaseUrl}=1")" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            @for (int i = 1; i <= ViewBag.lastPage; i++)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="@($"{ViewBag.PaginationBaseUrl}&page={i}")">@(i)</a>
+                </li>
+            }
+            <li class="page-item">
+                <a class="page-link" href="@($"{ViewBag.PaginationBaseUrl}={ViewBag.lastPage}")" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+
+
+        </ul>
+    </nav>
+</div>

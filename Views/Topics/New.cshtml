@@ -1,0 +1,66 @@
+﻿@model ProiectDAW.Models.Topic
+
+<h2 class="text-center mt-5" style="color: #ec407a;">Adaugare subiect</h2>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-6 offset-3">
+            @using (Html.BeginForm(actionName: "New", controllerName: "Topics", method: FormMethod.Post))
+            {
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.Label("Title", "Titlu Subiect", new { @class = "form-label" })
+                    @Html.TextBox("Title", null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Title, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Content", "Continut Subiect", new { @class = "form-label" })
+                    @Html.TextArea("Content", null, new { @class = "form-control"})
+                    @Html.ValidationMessage("Content", null, new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Selectati categoria</label>
+                    @Html.DropDownListFor(m => m.CategoryId,
+                new SelectList(Model.Categ, "Value", "Text"),
+                "Selectati categoria", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.CategoryId, null, new { @class = "text-danger" })
+                </div>
+
+                <button class="btn-submit-topic" type="submit">Adauga subiect</button>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-label {
+        color: #ec407a; 
+        margin-bottom: 5px; 
+    }
+
+    .form-control {
+        border: 1px solid #ec407a;
+        border-radius: 5px;
+        margin-bottom: 10px; 
+    }
+
+    .btn-submit-topic {
+        background-color: #f06292;
+        color: white;
+        border: : none;
+        padding: 10px 20px;
+        border-radius: 10px; 
+        font-family: 'Arial', sans-serif;
+    }
+
+    .btn-submit-topic:hover {
+        background-color: #e91e63; 
+        color: white;
+    }
+
+    .text-danger {
+        color: #e91e63; 
+    }

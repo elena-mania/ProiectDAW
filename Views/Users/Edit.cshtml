@@ -1,0 +1,83 @@
+﻿@model ProiectDAW.Models.ApplicationUser
+
+@using (Html.BeginForm(actionName: "Edit", controllerName: "Users", method: FormMethod.Post, routeValues: new { id = @Model.Id }))
+{
+    <div class="edit-form-style">
+        <div class="form-group">
+            <i class="bi bi-person"></i>
+            @Html.Label("UserName", "username", new { @class = "form-label" })
+            @Html.EditorFor(m => m.UserName, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+
+        <div class="form-group">
+            <i class="bi bi-envelope"></i>
+            @Html.Label("Email", "Email utilizator", new { @class = "form-label" })
+            @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+
+        <div class="form-group">
+            <i class="bi bi-phone"></i>
+            @Html.Label("PhoneNumber", "Numar telefon", new { @class = "form-label" })
+            @Html.EditorFor(m => m.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+
+        <div class="form-group">
+            <i class="bi bi-person"></i>
+            @Html.Label("FirstName", "Nume utilizator", new { @class = "form-label" })
+            @Html.EditorFor(m => m.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+
+        <div class="form-group">
+            <i class="bi bi-person"></i>
+            @Html.Label("LastName", "Prenume utilizator", new { @class = "form-label" })
+            @Html.EditorFor(m => m.LastName, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+
+        <div class="form-group">
+            <i class="bi bi-card-list"></i>
+            <label class="form-label">Selectați rolul</label>
+            @Html.DropDownList("newRole", new SelectList(Model.AllRoles, "Value", "Text", ViewBag.UserRole), null, new { @class = "form-control" })
+        </div>
+
+        <button class="btn-edit-user" type="submit">Editare user</button>
+    </div>
+}
+
+<style>
+    .edit-form-style {
+        background-color: #f8bbd0;
+        padding: 20px;
+        border-radius: 15px; 
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+        color: #4a4a4a; 
+        font-family: 'Arial', sans-serif;
+    }
+
+        .edit-form-style .form-group {
+            margin-bottom: 15px; 
+        }
+
+        .edit-form-style .form-label {
+            color: #ec407a;
+            margin-bottom: 5px; 
+        }
+
+        .edit-form-style .form-control {
+            border: 1px solid #ec407a;
+            border-radius: 5px;
+        }
+
+    .btn-edit-user {
+        background-color: #f06292; 
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-family: 'Arial', sans-serif;
+    }
+
+        .btn-edit-user:hover {
+            background-color: #e91e63; 
+            color: white;
+        }
+</style>

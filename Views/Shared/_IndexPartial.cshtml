@@ -1,0 +1,45 @@
+﻿<div class="card text-center card-style-feminin">
+    <div class="card-body">
+        <h3 class="card-title py-3 px-3 rounded-2">@Model.Title</h3>
+
+        <div class="card-text">@Model.Content</div>
+
+        <div class="d-flex justify-content-between flex-row mt-5">
+            <div><i class="bi bi-globe"></i> @Model.Category.CategoryName</div>
+            <div><i class="bi bi-person"></i>@Model.User.UserName</div>
+        </div>
+    </div>
+    <div class="card-footer text-muted">
+        <span class="date-style">@Model.Date</span>
+    </div>
+</div>
+
+<style>
+    .card-style-feminin {
+        background-color: #f8bbd0;
+        color: #4a4a4a; 
+        font-family: 'Arial', sans-serif;
+        border-radius: 15px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+    }
+
+        .card-style-feminin .card-title {
+            background-color: #ec407a; 
+            border-radius: 10px;
+        }
+
+        .card-style-feminin .card-footer {
+            background-color: #fce4ec;
+        }
+
+        .card-style-feminin i {
+            color: #6d6d6d; 
+
+    .date-style {
+        background-color: #f48fb1; 
+        color: #4a4a4a; 
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 0.9em;
+    }
+</style>

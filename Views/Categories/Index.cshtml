@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Lista Categoriilor";
+}
+
+
+<h2 class="Titluri">@ViewBag.Title</h2>
+<br />
+
+@if (TempData.ContainsKey("message"))
+{
+    <h1>@ViewBag.message</h1>
+}
+@if (User.IsInRole("Admin"))
+{
+    <br />
+    <a class="btn btn-outline-secondary" href="/Categories/New">Adauga o noua categorie</a>
+    <br />
+}
+<br />
+<br />
+
+<ol class="articles">
+    @{
+        var i = 1;
+        foreach (var category in ViewBag.Categories)
+        {
+            <li class="articles__article" style="--animation-order:@i" data-url="@Url.Action("Show","Categories", new { id = category.Id })">
+                <div class="articles__link">
+                    <div class="articles__content articles__content--lhs">
+                        <h2 class="articles__title">@category.CategoryName</h2>
+                        <div class="articles__footer">
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <a href="/Categories/Edit/@category.Id" style="text-decoration: none; color: inherit;">
+                                    <p>Editare categorie</p>
+                                </a>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="articles__content articles__content--rhs" aria-hidden="true">
+                        <h2 class="articles__title">@category.CategoryName</h2>
+                    </div>
+                </div>
+            </li>
+            i++;
+        }
+    }
+</ol>

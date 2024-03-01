@@ -1,0 +1,99 @@
+﻿@model ProiectDAW.Models.Topic
+
+
+<div class="card">
+
+    @Html.Partial("_IndexPartial", Model)
+     
+        @if((Model.UserId==ViewBag.CurrentUser) || ViewBag.IsAdmin)
+    {
+        <div class="d-flex flex-row justify-content-between">
+            <a class="btn btn-outline-warning" href="/Topics/Edit/@Model.Id">Editeaza subiectul</a>
+
+            <form method="post" action="/Topics/Delete/@Model.Id">
+
+                <button class="btn btn-outline-danger" type="submit">Sterge subiectul</button>
+
+            </form>
+
+        </div>
+    }
+
+</div>
+
+<br />
+<br />
+<h3 class="Titluri">Comentarii</h3>
+<div class="ButoaneSortareTopic">
+    <div class="butonSort">
+        <a asp-action="Show" asp-route-id="@Model.Id" asp-route-sortOrder="@(ViewBag.SortOrder == "asc" && ViewBag.SortBy == "Content" ? "desc" : "asc")" asp-route-sortBy="Content" class="button-56">Sorteaza dupa Continut</a>
+    </div>
+    <div class="butonSort">
+        <a asp-action="Show" asp-route-id="@Model.Id" asp-route-sortOrder="@(ViewBag.SortOrder == "asc" && ViewBag.SortBy == "Date" ? "desc" : "asc")" asp-route-sortBy="Date" class="button-56">Sorteaza dupa Data</a>
+    </div>
+</div>
+
+@foreach (var comm in ViewBag.Comments)
+{
+    <div class="comments-container">
+        <div class="comments-second">
+            <div class="comment-header">
+                <span class="comments-date">@comm.Date</span>
+                <span class="comments-email"><i class="bi bi-person"></i>@comm.User.Email</span>
+            </div>
+            <p class="comments-content">@comm.Content</p>
+            @if ((comm.UserId == ViewBag.CurrentUser) || ViewBag.IsAdmin)
+            {
+                <div class="comment-actions">
+                    <a class="btn btn-outline-warning" href="/Comments/Edit/@comm.Id">Editeaza</a>
+                    <form method="post" action="/Comments/Delete/@comm.Id">
+                        <button class="btn btn-outline-danger" type="submit">Sterge</button>
+                    </form>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+
+
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-2"></div>
+
+        <div class="col-md-8">
+
+            <div class="card">
+
+                <form method="post" action="/Topics/Show/@Model.Id">
+
+                    <div class="card-body">
+
+                        <input type="hidden" name="TopicId" value="@Model.Id" />
+
+                        <label>Lasă un comentariu!</label>
+                        <br />
+
+                        <textarea class="form-control" name="Content" required></textarea>
+
+                        @Html.ValidationMessage("Content", null, new { @class = "text-danger"})
+                        <br /> <br />
+
+                        <button class="btn btn-outline-success" type="submit">Adaugă comentariul</button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-2"></div>
+
+    </div>
+
+</div>

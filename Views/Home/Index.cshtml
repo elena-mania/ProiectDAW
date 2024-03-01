@@ -1,0 +1,28 @@
+﻿@model List<ProiectDAW.Models.Category>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="Titluri"><b>Bun venit!</b></h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<br>
+<br>
+<h2 class="Titluri"> <i>Categorii</i></h2>
+<br>
+<ul style="list-style-type:none">
+    @foreach (var category in Model)
+    {
+        <li>
+            <div class="cardCateg">
+                <h3>@category.CategoryName</h3> 
+                <p>Vezi <a href="/Categories/Show/@category.Id">Topicuri asociate</a></p>
+            </div>
+        </li>
+        <br>
+        <br>
+    }
+</ul>
+<br>
